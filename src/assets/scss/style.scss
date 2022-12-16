@@ -3,4 +3,6 @@
 body {
   background-color: $body-color;
   cursor: url("../images/cursor.png") 4 1, pointer;
+
+  color: $accent-color;
 }
