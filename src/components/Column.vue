@@ -1,6 +1,6 @@
 <template>
   <aside class="column">
-    <img class="column__img" src="../assets/foto.png" alt="" />
+    <img class="column__img" src="../assets/images/foto.png" alt="" />
     <div class="column__skeletons">
       <div class="stub stub__main"></div>
 
@@ -21,9 +21,9 @@
 
 <style lang="scss" scoped>
 .column {
-  background-color: $main-color;
+  background-color: $secondary-bg;
   padding: 18px 14px 24px;
-  border: 1px solid $border-color;
+  border: 1px solid $primary-border;
   border-radius: 12px;
 
   max-width: 236px;
