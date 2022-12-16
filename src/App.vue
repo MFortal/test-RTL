@@ -4,6 +4,7 @@
     <post-list :posts="posts" />-->
 
     <column />
+    <footer-elem />
   </section>
 </template>
 
@@ -11,9 +12,11 @@
 // import PostForm from "@/components/PostForm.vue";
 //import PostList from "@/components/PostList.vue";
 import Column from "@/components/Column.vue";
+import FooterElem from "@/components/Footer.vue";
 export default {
   components: {
     Column,
+    FooterElem,
     //PostList,
     //PostForm,
   },
