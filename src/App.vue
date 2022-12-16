@@ -1,9 +1,9 @@
 <template>
-  <section>
+  <section class="main">
     <!-- <post-form @create="createPost" />
     <post-list :posts="posts" />-->
-
     <column />
+    <table-elem />
     <footer-elem />
   </section>
 </template>
@@ -13,10 +13,13 @@
 //import PostList from "@/components/PostList.vue";
 import Column from "@/components/Column.vue";
 import FooterElem from "@/components/Footer.vue";
+import TableElem from "@/components/Table.vue";
+
 export default {
   components: {
     Column,
     FooterElem,
+    TableElem,
     //PostList,
     //PostForm,
   },
@@ -43,5 +46,15 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+
+  padding: 32px;
 }
 </style>
