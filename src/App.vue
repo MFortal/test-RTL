@@ -14,12 +14,14 @@
 import Column from "@/components/Column.vue";
 import FooterElem from "@/components/Footer.vue";
 import TableElem from "@/components/Table.vue";
+import Modal from "@/components/subcomponents/Modal.vue";
 
 export default {
   components: {
     Column,
     FooterElem,
     TableElem,
+    Modal,
     //PostList,
     //PostForm,
   },
@@ -31,11 +33,15 @@ export default {
         { id: 2, title: "Пост 2", body: "Описание 2" },
         { id: 3, title: "Пост 3", body: "Описание 3" },
       ],
+      modalVisible: false,
     };
   },
   methods: {
     createPost(post) {
       this.posts.push(post);
+    },
+    showModal() {
+      this.modalVisible = true;
     },
   },
 };
