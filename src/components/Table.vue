@@ -4,13 +4,18 @@
       <div
         class="table__cell"
         :data-column="currentColumn"
-        v-for="currentColumn in column">
+        v-for="currentColumn in column"
+        @drop="onDrop($event, currentRow, currentColumn)"
+        @dragover.prevent
+        @dragenter.prevent>
         <template v-for="item in items">
           <div
             class="item"
             v-if="
               item.positionX === currentRow && item.positionY === currentColumn
-            ">
+            "
+            @dragstart="onDragStart($event, item)"
+            draggable="true">
             <div class="item__block" :class="getClass(item.type)"></div>
             <div class="item__count">{{ item.count }}</div>
           </div>
@@ -21,31 +26,55 @@
 </template>
 
 <script>
+import { ref } from "vue";
 export default {
-  data() {
+  setup() {
+    const items = ref([
+      {
+        id: 1,
+        positionX: 1,
+        positionY: 1,
+        count: 4,
+        type: 1,
+      },
+      {
+        id: 2,
+        positionX: 1,
+        positionY: 2,
+        count: 2,
+        type: 2,
+      },
+      {
+        id: 3,
+        positionX: 1,
+        positionY: 3,
+        count: 5,
+        type: 3,
+      },
+    ]);
+
+    function onDragStart(e, item) {
+      e.dataTransfer.dropEffect = "move";
+      e.dataTransfer.effectAllowed = "move";
+      e.dataTransfer.setData("itemId", item.id.toString());
+    }
+    function onDrop(e, currentRow, currentColumn) {
+      const itemId = parseInt(e.dataTransfer.getData("itemId"));
+      items.value = items.value.map((item) => {
+        if (item.id == itemId) {
+          item.positionX = currentRow;
+          item.positionY = currentColumn;
+        }
+        return item;
+      });
+    }
+
     return {
       row: 5,
       column: 5,
-      items: [
-        {
-          positionX: 1,
-          positionY: 1,
-          count: 4,
-          type: 1,
-        },
-        {
-          positionX: 1,
-          positionY: 2,
-          count: 2,
-          type: 2,
-        },
-        {
-          positionX: 1,
-          positionY: 3,
-          count: 5,
-          type: 3,
-        },
-      ],
+      items,
+      onDragStart,
+      onDrop,
     };
   },
 
