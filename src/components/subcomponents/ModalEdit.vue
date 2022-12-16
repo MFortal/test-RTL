@@ -4,9 +4,11 @@
       <input
         class="modal__input"
         type="text"
-        placeholder="Введите количество"
-        v-model="item.count" />
-      <button class="modal__btn btn__cancel">Отмена</button>
+        v-model="newCount"
+        placeholder="Введите количество" />
+      <button class="modal__btn btn__cancel" @click="hideModal" type="reset">
+        Отмена
+      </button>
       <button class="modal__btn btn__confirm" @click="editItem">
         Подтвердить
       </button>
@@ -16,6 +18,7 @@
 
 <script>
 import Modal from "@/components/subcomponents/Modal.vue";
+import { updateCount } from "@/firebase.js";
 
 export default {
   props: {
@@ -33,19 +36,19 @@ export default {
         id: "",
         count: "",
       },
+      newCount: null,
     };
   },
 
   methods: {
-    console() {
-      console.log(item);
+    hideModal() {
+      this.$emit("update:show", false);
+      this.newCount = null;
     },
-    editItem() {
-      this.$emit("create", this.item);
-      this.item = {
-        id: "",
-        count: "",
-      };
+    async editItem() {
+      this.$emit("update:show", false);
+      await updateCount(this.item, this.newCount);
+      this.newCount = null;
     },
   },
 };
@@ -62,7 +65,7 @@ export default {
 
     background: rgba(38, 38, 38, 0.6);
 
-    border: 1px solid $primary-border;
+    border-top: 1px solid $primary-border;
     backdrop-filter: blur(8px);
 
     position: absolute;

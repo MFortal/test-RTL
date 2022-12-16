@@ -1,7 +1,8 @@
 <template>
+  <div @click="addAllItems" class="refresh">
+    Удалили все элементы? Восстановить
+  </div>
   <section class="main">
-    <!-- <post-form @create="createPost" />
-    <post-list :posts="posts" />-->
     <column />
     <table-elem />
     <footer-elem />
@@ -9,12 +10,11 @@
 </template>
 
 <script>
-// import PostForm from "@/components/PostForm.vue";
-//import PostList from "@/components/PostList.vue";
 import Column from "@/components/Column.vue";
 import FooterElem from "@/components/Footer.vue";
 import TableElem from "@/components/Table.vue";
 import Modal from "@/components/subcomponents/Modal.vue";
+import { createData } from "@/firebase.js";
 
 export default {
   components: {
@@ -22,26 +22,46 @@ export default {
     FooterElem,
     TableElem,
     Modal,
-    //PostList,
-    //PostForm,
+    createData,
   },
 
   data() {
     return {
-      posts: [
-        { id: 1, title: "Пост 1", body: "Описание 1" },
-        { id: 2, title: "Пост 2", body: "Описание 2" },
-        { id: 3, title: "Пост 3", body: "Описание 3" },
-      ],
       modalVisible: false,
     };
   },
   methods: {
-    createPost(post) {
-      this.posts.push(post);
-    },
     showModal() {
       this.modalVisible = true;
+    },
+
+    async addAllItems() {
+      const items = [
+        {
+          id: 1,
+          positionX: 1,
+          positionY: 1,
+          count: 4,
+          type: 1,
+        },
+        {
+          id: 2,
+          positionX: 1,
+          positionY: 2,
+          count: 2,
+          type: 2,
+        },
+        {
+          id: 3,
+          positionX: 1,
+          positionY: 3,
+          count: 5,
+          type: 3,
+        },
+      ];
+      for (let i = 0; i < items.length; i++) {
+        await createData(items[i]);
+      }
     },
   },
 };
@@ -52,6 +72,11 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.refresh {
+  text-align: center;
+  padding: 12px 40px;
 }
 
 .main {

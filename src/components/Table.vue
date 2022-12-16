@@ -26,52 +26,46 @@
 <script>
 import { ref } from "vue";
 import Item from "@/components/subcomponents/Item.vue";
+import { itemsCollection, updatePositions } from "@/firebase.js";
+
+import { onSnapshot, query } from "firebase/firestore";
+
+let items = ref([]);
 
 export default {
-  components: {
-    Item,
-  },
   setup() {
-    const items = ref([
-      {
-        id: 1,
-        positionX: 1,
-        positionY: 1,
-        count: 4,
-        type: 1,
-      },
-      {
-        id: 2,
-        positionX: 1,
-        positionY: 2,
-        count: 2,
-        type: 2,
-      },
-      {
-        id: 3,
-        positionX: 1,
-        positionY: 3,
-        count: 5,
-        type: 3,
-      },
-    ]);
-
-    function onDrop(e, currentRow, currentColumn) {
+    const onDrop = async (e, currentRow, currentColumn) => {
       const itemId = parseInt(e.dataTransfer.getData("itemId"));
-      items.value = items.value.map((item) => {
-        if (item.id == itemId) {
-          item.positionX = currentRow;
-          item.positionY = currentColumn;
-        }
-        return item;
-      });
-    }
+
+      const item = items.value.find((x) => x.id == itemId);
+      await updatePositions(item, currentRow, currentColumn);
+    };
     return {
       row: 5,
       column: 5,
       items,
       onDrop,
     };
+  },
+  mounted() {
+    let itemsDB = [];
+    onSnapshot(itemsCollection, (querySnapshot) => {
+      itemsDB = [];
+      querySnapshot.forEach((doc) => {
+        const item = {
+          id: doc.id,
+          type: doc.data().type,
+          count: doc.data().count,
+          positionX: doc.data().positionX,
+          positionY: doc.data().positionY,
+        };
+        itemsDB.push(item);
+      });
+      items.value = itemsDB;
+    });
+  },
+  components: {
+    Item,
   },
 };
 </script>

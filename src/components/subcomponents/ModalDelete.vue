@@ -1,11 +1,14 @@
 <template>
   <modal :item="item">
-    <button class="modal__btn btn__delete">Удалить</button>
+    <button class="modal__btn btn__delete" @click="deleteItem(item)">
+      Удалить
+    </button>
   </modal>
 </template>
 
 <script>
 import Modal from "@/components/subcomponents/Modal.vue";
+import { deleteData } from "@/firebase.js";
 
 export default {
   props: {
@@ -16,6 +19,15 @@ export default {
   },
   components: {
     Modal,
+    deleteData,
+  },
+
+  methods: {
+    async deleteItem(item) {
+      this.$emit("update:show", false);
+
+      await deleteData(item);
+    },
   },
 };
 </script>

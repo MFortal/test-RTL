@@ -34,21 +34,16 @@ export default {
     ModalDelete,
     ModalEdit,
   },
-  setup() {
-    function onDragStart(e, item) {
-      e.dataTransfer.dropEffect = "move";
-      e.dataTransfer.effectAllowed = "move";
-      e.dataTransfer.setData("itemId", item.id.toString());
-    }
-    return {
-      onDragStart,
-    };
-  },
   data() {
     return { modalVisibleDelete: false, modalVisibleCount: false };
   },
 
   methods: {
+    onDragStart(e, item) {
+      e.dataTransfer.dropEffect = "move";
+      e.dataTransfer.effectAllowed = "move";
+      e.dataTransfer.setData("itemId", item.id.toString());
+    },
     getClass(type) {
       return {
         "type-1": type === 1,
