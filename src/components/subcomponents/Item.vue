@@ -72,6 +72,14 @@ export default {
 
   position: relative;
 
+  &:active {
+    animation: dragStyleItem 0.2s;
+
+    & .item__count {
+      display: none;
+    }
+  }
+
   &:hover {
     cursor: url("../../assets/images/cursor-hover.png") 4 1, pointer;
     background-color: $hover-bg;
@@ -108,6 +116,24 @@ export default {
     border-radius: 6px 0px 0px 0px;
 
     opacity: 0.4;
+  }
+}
+
+@keyframes dragStyleItem {
+  0% {
+    width: 105px;
+    height: 100px;
+
+    background: $secondary-bg;
+    border: 1px solid $primary-border;
+    border-radius: 24px;
+  }
+  100% {
+    width: 105px;
+    height: 100px;
+    background: $secondary-bg;
+    border: 1px solid $primary-border;
+    border-radius: 24px;
   }
 }
 </style>

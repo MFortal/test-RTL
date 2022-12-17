@@ -17,6 +17,10 @@
   font-display: swap;
 }
 
+*:active {
+  cursor: url("../images/cursor-active.png") 4 1, pointer;
+}
+
 body {
   font-family: "Inter", sans-serif;
 
