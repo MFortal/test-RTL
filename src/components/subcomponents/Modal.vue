@@ -40,7 +40,7 @@ export default {
     hideModal() {
       document.querySelector(".modal").classList.add("modal-hide");
 
-      setTimeout(() => this.$emit("update:show", false), 2000);
+      setTimeout(() => this.$emit("update:show", false), 1500);
     },
   },
 };
@@ -61,7 +61,7 @@ export default {
   z-index: 8;
   position: absolute;
 
-  animation-duration: 2s;
+  animation-duration: 1.5s;
   animation-name: slidein;
 
   &-hide {

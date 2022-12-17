@@ -70,7 +70,7 @@ export const deleteData = async (item) => {
 export const updateCount = async (item, newCount) => {
   const itemRef = doc(itemsCollection, item.id);
   await updateDoc(itemRef, {
-    count: newCount,
+    count: newCount ? newCount : 0,
   });
 };
 
