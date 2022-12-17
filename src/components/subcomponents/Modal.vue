@@ -38,7 +38,9 @@ export default {
       };
     },
     hideModal() {
-      this.$emit("update:show", false);
+      document.querySelector(".modal").classList.add("modal-hide");
+
+      setTimeout(() => this.$emit("update:show", false), 2000);
     },
   },
 };
@@ -61,6 +63,11 @@ export default {
 
   animation-duration: 2s;
   animation-name: slidein;
+
+  &-hide {
+    right: -250px;
+    animation-name: slideout;
+  }
 
   &__btn {
     padding: 11px 0;
@@ -121,6 +128,16 @@ export default {
 
   to {
     right: 0;
+  }
+}
+
+@keyframes slideout {
+  from {
+    right: 0;
+  }
+
+  to {
+    right: -250px;
   }
 }
 </style>

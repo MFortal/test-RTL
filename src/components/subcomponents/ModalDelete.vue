@@ -24,9 +24,12 @@ export default {
 
   methods: {
     async deleteItem(item) {
-      this.$emit("update:show", false);
-
-      await deleteData(item);
+      document.querySelector(".modal").classList.add("modal-hide");
+      setTimeout(() => {
+        deleteData(item)
+          .then(() => this.$emit("update:show", false))
+          .catch(() => alert("Удаление завершенно с ошибкой"));
+      }, 2000);
     },
   },
 };

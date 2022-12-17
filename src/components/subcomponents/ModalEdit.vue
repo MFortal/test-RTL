@@ -42,11 +42,14 @@ export default {
 
   methods: {
     hideModal() {
-      this.$emit("update:show", false);
+      document.querySelector(".modal").classList.add("modal-hide");
+      setTimeout(() => this.$emit("update:show", false), 2000);
       this.newCount = null;
     },
     async editItem() {
-      this.$emit("update:show", false);
+      document.querySelector(".modal").classList.add("modal-hide");
+      setTimeout(() => this.$emit("update:show", false), 2000);
+
       await updateCount(this.item, this.newCount);
       this.newCount = null;
     },
