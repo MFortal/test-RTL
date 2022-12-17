@@ -59,6 +59,9 @@ export default {
   z-index: 8;
   position: absolute;
 
+  animation-duration: 2s;
+  animation-name: slidein;
+
   &__btn {
     padding: 11px 0;
     background: $primary-red;
@@ -108,6 +111,16 @@ export default {
     height: 115px;
 
     margin-bottom: 30px;
+  }
+}
+
+@keyframes slidein {
+  from {
+    right: -250px;
+  }
+
+  to {
+    right: 0;
   }
 }
 </style>
