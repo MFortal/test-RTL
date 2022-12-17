@@ -5,7 +5,8 @@
         class="modal__input"
         type="text"
         v-model="newCount"
-        placeholder="Введите количество" />
+        placeholder="Введите количество"
+        @keyup="checkValue" />
       <button class="modal__btn btn__cancel" @click="hideModal" type="reset">
         Отмена
       </button>
@@ -32,15 +33,16 @@ export default {
   },
   data() {
     return {
-      currentItem: {
-        id: "",
-        count: "",
-      },
       newCount: null,
     };
   },
 
   methods: {
+    checkValue() {
+      const value = this.newCount;
+      this.newCount = value.replace(/\D/g, "");
+    },
+
     hideModal() {
       document.querySelector(".modal").classList.add("modal-hide");
       setTimeout(() => this.$emit("update:show", false), 2000);
