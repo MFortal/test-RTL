@@ -54,5 +54,6 @@ export default {
 
 .btn__delete {
   width: 90%;
+  font-family: "SF Pro Display";
 }
 </style>

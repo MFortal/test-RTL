@@ -77,8 +77,6 @@ export default {
 
   &__input {
     font-family: "Inter";
-    font-style: normal;
-    font-weight: 500;
     font-size: 14px;
     line-height: 17px;
     color: $accent-color;
@@ -102,17 +100,14 @@ export default {
   &__cancel,
   &__confirm {
     border-radius: 8px;
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    line-height: 17px;
   }
 
   &__cancel {
     background: $accent-color;
     padding: 8px 20px;
-
-    font-family: "SF Pro Display";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
 
     color: $primary-black;
   }
