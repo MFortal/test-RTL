@@ -76,7 +76,7 @@ export default {
     animation: dragStyleItem 0.2s;
 
     & .item__count {
-      display: none;
+      opacity: 0;
     }
   }
 
