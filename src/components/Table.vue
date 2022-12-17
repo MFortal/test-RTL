@@ -98,4 +98,17 @@ export default {
     }
   }
 }
+
+.table__cell:active {
+  animation: dragStyleCell 0.2s;
+}
+
+@keyframes dragStyleCell {
+  0% {
+    border: none;
+  }
+  100% {
+    border: none;
+  }
+}
 </style>
